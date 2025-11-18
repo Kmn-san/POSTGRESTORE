@@ -63,7 +63,7 @@ if(process.env.NODE_ENV === "production"){
     //server our react app
     app.use(express.static(path.join(__dirname,"/frontend/dist")))
 
-       app.get("*", (req, res, next) => {
+       app.get( (req, res, next) => {
         // Skip API routes
         if (req.path.startsWith("/api/")) {
             return next();
