@@ -1,5 +1,5 @@
 import express from "express";
-import {getProducts,createProduct,getProduct, updateProduct, deleteProduct } from "../controllers/produtcController.js";
+import {getProducts,createProduct,getProduct, updateProduct, deleteProduct} from "../controllers/productController.js";
 
 const router = express.Router();
 

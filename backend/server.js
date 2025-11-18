@@ -3,6 +3,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
+import auth from "./routes/auth.js"
 import productRoutes from "./routes/productRoutes.js"
 import { sql } from "./config/db.js";
 import {aj} from "./lib/arcjet.js"
@@ -55,13 +56,14 @@ app.use(async(req,res,next) =>{
     }
 })
 
+app.use("/api/auth",auth)
 app.use("/api/products",productRoutes)
 
 if(process.env.NODE_ENV === "production"){
     //server our react app
     app.use(express.static(path.join(__dirname,"/frontend/dist")))
 
-    app.get((req,res) => {
+    app.get("*",(req,res) => {
         res.sendFile(path.resolve(__dirname,"frontend","dist","index.html"))
     })
 }
