@@ -63,8 +63,13 @@ if(process.env.NODE_ENV === "production"){
     //server our react app
     app.use(express.static(path.join(__dirname,"/frontend/dist")))
 
-    app.get((req,res) => {
-        res.sendFile(path.resolve(__dirname,"frontend","dist","index.html"))
+       app.get("*", (req, res, next) => {
+        // Skip API routes
+        if (req.path.startsWith("/api/")) {
+            return next();
+        }
+        // For all other routes, send the React app
+        res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
     })
 }
 
